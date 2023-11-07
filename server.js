@@ -1,5 +1,4 @@
 const express = require("express"); //create an express application
-const cluster = require("cluster");
 
 const app = express(); // initialize our express application
 
@@ -21,12 +20,5 @@ app.get("/timer", (re, res) => {
 });
 
 console.log("Running server.js");
-
-if (cluster.isMaster) {
-  console.log("Master has started");
-  cluster.fork(); //creates the first cluster
-  cluster.fork(); //creates the second cluster
-} else {
-  console.log("Worker has started");
-  app.listen(3000);
-}
+console.log("Worker has started");
+app.listen(3000);
